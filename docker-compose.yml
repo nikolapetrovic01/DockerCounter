@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5001:5000"
+    volumes:
+      - .:/code
+    environment:
+      - FLASK_ENV=development
+      - REDIS_HOST=redis
+      - FLASK_DEBUG=1
+      - CHOKIDAR_USEPOLLING=true
+    command: flask run --host=0.0.0.0 --reload
+  redis:
+    image: "redis:alpine"
